@@ -80,7 +80,8 @@ function createGalleryItems(images) {
         image.src = preview;
         image.alt = description;
         image.dataset.source = original;
-    
+        image.width = 360;
+        image.height = 200;
         link.append(image);
         listItem.append(link);
 
@@ -95,9 +96,15 @@ gallery.addEventListener('click', onImageClick);
 
 function onImageClick(event) {
     event.preventDefault();
+
     const isImage = event.target.classList.contains('gallery-image');
-    if (!isImage) return;
+        if (!isImage) return;
 
     const largeImageUrl = event.target.dataset.source;
-    console.log(largeImageUrl);
-}  
+
+    const instance = basicLightbox.create(`<img src="${largeImageUrl}" width="1112" height="640">`);
+
+    instance.show();
+}
+
+
